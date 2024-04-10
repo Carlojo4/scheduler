@@ -15,7 +15,7 @@ Then, run the 'gradle build' task in order to install all the dependencies used.
 
 Then, run the 'gradle bootRun' task to run the application.
 
-Now the application is running and exposed the REST endpoint on this url [[http://localhost:8080/add-task](http://localhost:8080/api/scheduler)]([http://localhost:4200/add-task](http://localhost:8080/api/scheduler)) and is ready to work!
+Now the application is running and exposed the REST endpoint on this url [[http://localhost:4200/add-task](http://localhost:8080/api/scheduler)](http://localhost:8080/api/scheduler)) and is ready to work!
 
 ## Frontend
 
