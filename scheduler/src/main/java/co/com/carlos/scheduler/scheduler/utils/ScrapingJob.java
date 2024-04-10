@@ -1,6 +1,7 @@
 package co.com.carlos.scheduler.scheduler.utils;
 
 import co.com.carlos.scheduler.scheduler.controller.SchedulerController;
+import co.com.carlos.scheduler.scheduler.exception.InvalidCronException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.quartz.Job;
@@ -14,18 +15,17 @@ public class ScrapingJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        JobDataMap dataMap = context.getJobDetail().getJobDataMap();
-        String url = (String) dataMap.get("url");
-        String scrapingInstructions = (String) dataMap.get("scrapingHeaders");
+        final JobDataMap dataMap = context.getJobDetail().getJobDataMap();
+        final String url = (String) dataMap.get("url");
 
         try {
-            String pingResult = Pinger.ping(url);
-            String scrapedHeaders = HeaderScraper.scrapeHeaders(url);
+            final String pingResult = Pinger.ping(url);
+            final String scrapedHeaders = HeaderScraper.scrapeHeaders(url);
 
             logger.info("ping result: " + pingResult);
             logger.info("headers result: " + scrapedHeaders);
         } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
+            throw new InvalidCronException(e.getMessage());
         }
 
         //Show the information about the job
